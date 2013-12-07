@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent" 
+    android:orientation="vertical" 
+    >
+    
+    <FrameLayout 
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:background="@android:color/transparent" 
+    	android:orientation="vertical"
+    	android:layout_marginTop="12.5dp"
+    	android:layout_marginBottom="12.5dp"
+        >
+	    <ImageView 
+	        android:id="@+id/panel_image_view"
+	        android:layout_width="104dp" 
+	    	android:layout_height="104dp"
+	    	android:layout_gravity="center"
+	    	android:background="@android:color/white"
+	    	android:scaleType="fitXY"
+	        />
+	    
+	    <FrameLayout 
+	        android:layout_width="match_parent"
+	    	android:layout_height="match_parent"
+	    	android:layout_gravity="center">
+	    	
+		    <ImageView 
+		        android:id="@+id/panel_select_effect"
+		        android:layout_width="wrap_content"
+		    	android:layout_height="wrap_content"
+		    	android:layout_gravity="center"
+		    	android:scaleType="fitXY"
+		    	android:visibility="invisible"
+		    	android:src="@drawable/right_slide_select_effect"/>
+		    
+		    <ImageButton 
+		        android:id="@+id/panel_delete_button"
+		        android:layout_width="wrap_content"
+		    	android:layout_height="wrap_content"
+				android:layout_gravity="right|top"
+			    android:layout_marginLeft="30dp"
+    		    android:layout_marginBottom="40dp"
+		    	android:scaleType="fitXY"
+		    	android:visibility="invisible"
+		    	android:background="@android:color/transparent"
+		    	android:src="@drawable/right_slide_delete_btn"/>
+	    </FrameLayout>
+	</FrameLayout>
+</LinearLayout>

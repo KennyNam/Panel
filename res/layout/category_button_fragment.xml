@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+    
+	<LinearLayout 
+	    android:id="@+id/user_category_button_search"
+	 	android:layout_width="wrap_content"
+	  	android:layout_height="43dp"
+	  	android:orientation="horizontal"
+	  	android:layout_weight="1"
+	  	android:background="@drawable/search_tab_button_02">
+	  	
+	    <ImageView 
+	        android:layout_width="wrap_content"
+	  		android:layout_height="match_parent"
+	  		android:scaleType="fitXY"
+	  		android:layout_marginLeft="54.5dp"
+	  		android:layout_marginTop="10dp"
+	  		android:layout_marginRight="13dp"
+	  		android:src = "@drawable/search_user_icon"/>
+	    
+	    <TextView 
+	        android:layout_width="wrap_content"
+	  		android:layout_height="wrap_content"
+	  		android:layout_marginTop="16dp"
+	  		android:textSize="15sp"
+	  		android:textColor="@android:color/white"
+	  		android:text="User"/>
+	    
+	</LinearLayout>  
+	
+	<LinearLayout 
+	    android:id="@+id/story_category_button_search"
+	 	android:layout_width="wrap_content"
+	  	android:layout_height="43dp"
+	  	android:orientation="horizontal"
+	  	android:layout_weight="1"
+	  	android:background="@drawable/search_tab_button_01">
+	    
+	    <ImageView 
+	        android:layout_width="wrap_content"
+	  		android:layout_height="match_parent"
+	  		android:scaleType="fitXY"
+	  		android:layout_marginLeft="54.5dp"
+	  		android:layout_marginTop="10dp"
+	  		android:layout_marginRight="8dp"
+	  		android:src = "@drawable/search_story_icon"/>
+	    
+	    
+	    
+	    <TextView 
+	        android:layout_width="wrap_content"
+	  		android:layout_height="wrap_content"
+	  		android:layout_marginTop="16dp"
+	  		android:textSize="15sp"
+	  		android:textColor="@android:color/white"
+	  		android:text="Story"/>
+	    
+	</LinearLayout>
+
+</LinearLayout>
