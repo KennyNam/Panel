@@ -30,10 +30,12 @@ import com.example.adapter.RightDrawerListAdapter;
 import com.example.customview.DynamicListView;
 import com.example.fragment.BaseContainerFragment;
 import com.example.fragment.BaseListviewFragment;
+import com.example.fragment.SettingListviewFragment;
 import com.example.fragment.TopMenuBarFragment;
 import com.example.slidemenu.BasicContentsListItem;
 import com.example.slidemenu.PanelContentsListItem;
 import com.example.slidemenu.R;
+import com.example.slidemenu.SettingComponentItem;
 
 public class SlideMenuActivity extends Activity{
 	private DrawerLayout mDrawerLayout;
@@ -120,7 +122,16 @@ public class SlideMenuActivity extends Activity{
 					
 				case 7:
 					confirmDrawerState(GravityCompat.START);
-					BaseListviewFragment settingListviewFragment = new BaseListviewFragment();
+					ArrayList<SettingComponentItem> arrList = new ArrayList<SettingComponentItem>();
+					arrList.add(new SettingComponentItem("Report problem"));
+					arrList.add(new SettingComponentItem("Blog"));
+					arrList.add(new SettingComponentItem("Privacy problem"));
+					arrList.add(new SettingComponentItem("Terms & Service"));
+					arrList.add(new SettingComponentItem("About"));
+					arrList.add(new SettingComponentItem("Social connection"));
+					arrList.add(new SettingComponentItem("Edit profile"));
+					arrList.add(new SettingComponentItem("Log out"));
+					SettingListviewFragment settingListviewFragment = new SettingListviewFragment(arrList, R.layout.setting_listview_component, SlideMenuActivity.this);
 					getFragmentManager().beginTransaction().add(R.id.main_container, settingListviewFragment).commit();
 					
 					break;
