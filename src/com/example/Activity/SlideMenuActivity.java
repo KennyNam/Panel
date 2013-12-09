@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.DrawerLayout.DrawerListener;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -76,9 +77,7 @@ public class SlideMenuActivity extends Activity{
 		// check left drawer Image's width to define LeftDrawer's width
 		// I need "R.drawable.left_slide_momo_background" because it have same
 		// width with whole LeftDrawer
-		BitmapDrawable leftDrawerImage = (BitmapDrawable) this.getResources().getDrawable(R.drawable.left_slide_momo_background);
-		mLeftDrawerListWidth = leftDrawerImage.getBitmap().getWidth();
-
+		setDrawerWidth();
 		mDrawerLayout.setScrimColor(color.transparent);
 		mLeftDrawerList = (ListView) findViewById(R.id.left_drawer);
 		
@@ -294,13 +293,16 @@ public class SlideMenuActivity extends Activity{
 		mContentFrame.startAnimation(animationTranslateOption);
 	}
 	
+	public void setDrawerWidth(){
+		this.mRightDrawerListWidth = dpToPx(160);
+		this.mLeftDrawerListWidth = dpToPx(180);
+	}
 	
-	@Override
-	protected void onStart() {
-		super.onStart();
-		mRightDrawerListWidth = mRightDrawerList.getWidth();
-		mRightDrawerListWidth = 160 * 2;
-	};
+	public int dpToPx(int dp) {
+		DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
+	    int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));       
+	    return px;
+	}
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)

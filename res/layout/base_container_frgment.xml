@@ -9,20 +9,18 @@
        android:id="@+id/top_container"
        android:layout_width="match_parent"
        android:layout_height="wrap_content" 
-       android:layout_weight="1"
       	android:orientation="vertical">
     </FrameLayout>
     <FrameLayout
        android:id="@+id/toolbar_container"
        android:layout_width="match_parent"
-       android:layout_height="wrap_content" 
-       android:layout_weight="1"
+       android:layout_height="35dp" 
       	android:orientation="vertical">
     </FrameLayout>
     <FrameLayout
        android:id="@+id/main_container"
        android:layout_width="match_parent"
-       android:layout_height="wrap_content" 
+       android:layout_height="450dp" 
        android:layout_weight="10"
      	android:orientation="vertical">
     </FrameLayout>
