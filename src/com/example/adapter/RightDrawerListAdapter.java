@@ -108,7 +108,7 @@ public class RightDrawerListAdapter extends BaseAdapter
 		Object item = getItem(position);
 		return mSelectMap.get(item);
 	}
-
+	
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parents)
 	{

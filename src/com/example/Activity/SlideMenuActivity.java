@@ -29,6 +29,8 @@ import com.example.adapter.LeftDrawerListAdapter;
 import com.example.adapter.RightDrawerListAdapter;
 import com.example.customview.DynamicListView;
 import com.example.fragment.BaseContainerFragment;
+import com.example.fragment.BaseListviewFragment;
+import com.example.fragment.TopMenuBarFragment;
 import com.example.slidemenu.BasicContentsListItem;
 import com.example.slidemenu.PanelContentsListItem;
 import com.example.slidemenu.R;
@@ -91,6 +93,8 @@ public class SlideMenuActivity extends Activity{
 		mLeftDrawerList.getLayoutParams().width = mLeftDrawerListWidth;
 		mLeftDrawerList.setOnItemClickListener(ListViewOnClickListener);
 		mDrawerLayout.setDrawerListener(mDrawerListener);
+		
+		getActionBar().hide();
 		BaseContainerFragment baseContaiverFagment = new BaseContainerFragment();
 		baseContaiverFagment.setArguments(getIntent().getExtras());
 		getFragmentManager().beginTransaction().add(R.id.content_frame, baseContaiverFagment).commit();
@@ -109,21 +113,17 @@ public class SlideMenuActivity extends Activity{
 				switch (tag)
 				{
 				case 0:
-					if (mDrawerLayout.isDrawerOpen(GravityCompat.START))
-					{
-						mDrawerLayout.closeDrawer(GravityCompat.START);
-					} else if (mDrawerLayout.isDrawerOpen(GravityCompat.START) == false)
-					{
-						if (mDrawerLayout.isDrawerOpen(GravityCompat.END) == true)
-						{
-							mDrawerLayout.closeDrawer(GravityCompat.END);
-						}
-						mDrawerLayout.openDrawer(GravityCompat.START);
-					}
+					confirmDrawerState(GravityCompat.START);
 					Intent intentToSearchActivity = new Intent(SlideMenuActivity.this, SearchActivity.class);
 					startActivityForResult(intentToSearchActivity, SEARCH_REQUEST_CODE);
 					break;
-
+					
+				case 7:
+					confirmDrawerState(GravityCompat.START);
+					BaseListviewFragment settingListviewFragment = new BaseListviewFragment();
+					getFragmentManager().beginTransaction().add(R.id.main_container, settingListviewFragment).commit();
+					
+					break;
 				default:
 					break;
 				}
@@ -236,8 +236,37 @@ public class SlideMenuActivity extends Activity{
 			
 		}
 	};
+	
+	/**
+	 * To close Drawer correctly, Confirm resent state before operate 
+	 * @param gravity
+	 */
+	private void confirmDrawerState (int gravity) {
+		int reverseGravity = -1;
+		if(gravity == GravityCompat.START){
+			reverseGravity = GravityCompat.END;
+		}else{
+			reverseGravity = GravityCompat.START;
+		}
 		
-	public void animationControler(float toXDelta) {
+		if (mDrawerLayout.isDrawerOpen(gravity))
+		{
+			mDrawerLayout.closeDrawer(gravity);
+		} else if (mDrawerLayout.isDrawerOpen(gravity) == false)
+		{
+			if (mDrawerLayout.isDrawerOpen(reverseGravity) == true)
+			{
+				mDrawerLayout.closeDrawer(reverseGravity);
+			}
+			mDrawerLayout.openDrawer(gravity);
+		}
+	}
+	
+	/**
+	 * Control Drawer Animation
+	 * @param toXDelta
+	 */
+	private void animationControler(float toXDelta) {
 		float gapBetweenToFrom = fromXDelta - toXDelta;
 		Animation animationTranslateOption;
 		
