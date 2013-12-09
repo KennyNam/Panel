@@ -23,6 +23,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -30,6 +31,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -101,6 +104,10 @@ public class DynamicListView extends ListView {
     private int mScrollState = OnScrollListener.SCROLL_STATE_IDLE;
 
     private int presentSelectedItemPosition = INVALID_ID;
+ 
+    private Activity slideMenuActivity;
+    private DrawerLayout mDrawerLayout;
+    
     public DynamicListView(Context context) {
         super(context);
         init(context);
@@ -119,6 +126,7 @@ public class DynamicListView extends ListView {
     public void init(Context context) {
         setOnItemLongClickListener(mOnItemLongClickListener);
         setOnScrollListener(mScrollListener);
+        slideMenuActivity = (Activity) context;
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         mSmoothScrollAmountAtEdge = (int)(SMOOTH_SCROLL_AMOUNT_AT_EDGE / metrics.density);
     }
@@ -130,6 +138,7 @@ public class DynamicListView extends ListView {
     private AdapterView.OnItemLongClickListener mOnItemLongClickListener =
             new AdapterView.OnItemLongClickListener() {
                 public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int pos, long id) {
+                	drawLayoutSetLock();
                 	if(pos == mPanelList.size() - 1){
                     	return false;
                     }
@@ -202,7 +211,6 @@ public class DynamicListView extends ListView {
         RightDrawerListAdapter adapter = ((RightDrawerListAdapter)getAdapter());
         mAboveItemId = adapter.getItemId(position - 1);
     	mBelowItemId = adapter.getItemId(position + 1);
-        Log.e("mBelowItemId", String.valueOf(mBelowItemId));
     }
 
     /** Retrieves the view in the list corresponding to itemID */
@@ -251,14 +259,11 @@ public class DynamicListView extends ListView {
                 mDownX = (int)event.getX();
                 mDownY = (int)event.getY();
                 mActivePointerId = event.getPointerId(0);
-                Log.e("onTouchEvent", "mActivePointerId = " + String.valueOf(mActivePointerId));
                 break;
             case MotionEvent.ACTION_MOVE:
                 if (mActivePointerId == INVALID_POINTER_ID) {
                     break;
                 }
-//                if ( mPanelList.size() - 1 == pointToPosition((int)event.getX(), (int)event.getY())) mCellIsMobile = false;
-//                Log.e("check", "mPanelList.size() = " + (mPanelList.size() - 1) + "   pointToPosition = " +  pointToPosition((int)event.getX(), (int)event.getY()));
                 int pointerIndex = event.findPointerIndex(mActivePointerId);
                 mLastEventY = (int) event.getY(pointerIndex);
                 int deltaY = mLastEventY - mDownY;
@@ -279,6 +284,7 @@ public class DynamicListView extends ListView {
                 break;
             case MotionEvent.ACTION_UP:
                 touchEventsEnded();
+                drawLayoutSetUnlock();
                 break;
             case MotionEvent.ACTION_CANCEL:
                 touchEventsCancelled();
@@ -294,6 +300,7 @@ public class DynamicListView extends ListView {
                 if (pointerId == mActivePointerId) {
                     touchEventsEnded();
                 }
+                drawLayoutSetUnlock();
                 break;
             default:
                 break;
@@ -592,7 +599,30 @@ public class DynamicListView extends ListView {
             }
         }
     };
-            
+    
+    /**
+     * To lock DrawerLayout when user modify panel
+     */
+    private void drawLayoutSetLock(){
+    	if(mDrawerLayout == null) {
+    		mDrawerLayout = (DrawerLayout) slideMenuActivity.findViewById(R.id.drawer_layout);
+    	}
+    	mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN, GravityCompat.END);
+    	mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, GravityCompat.START);
+    }
+    
+    /**
+     * To unlock DrawerLayout when user finish modify
+     */
+    private void drawLayoutSetUnlock(){
+    	if(mDrawerLayout == null) {
+    		mDrawerLayout = (DrawerLayout) slideMenuActivity.findViewById(R.id.drawer_layout);
+    	}
+    	mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED, GravityCompat.END);
+    	mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED, GravityCompat.START);
+    }
+	
+
     /**
      * Add Panel - add one null list on end of list, and set scroll on end of list
      */
