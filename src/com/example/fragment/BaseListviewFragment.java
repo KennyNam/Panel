@@ -8,11 +8,15 @@ import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 @SuppressLint("ValidFragment")
 public abstract class BaseListviewFragment<T> extends Fragment {
@@ -38,11 +42,13 @@ public abstract class BaseListviewFragment<T> extends Fragment {
 		mBaseListview = (ListView) fragmentView.findViewById(R.id.baseListview);
 		baseAdapter = new BaseListViewAdapter();
 		mBaseListview.setAdapter(baseAdapter);
+		mBaseListview.setOnItemClickListener(listViewOnItemClickListener);
 		return fragmentView;
 	}
 	
 	
-	class BaseListViewAdapter extends BaseAdapter{
+	
+	class BaseListViewAdapter extends BaseAdapter {
 		
 		public BaseListViewAdapter(){
 			super();
@@ -76,9 +82,21 @@ public abstract class BaseListviewFragment<T> extends Fragment {
 		{
 			return arg0;
 		}
-		
 	}
+	
+	
+	private AdapterView.OnItemClickListener listViewOnItemClickListener = new AdapterView.OnItemClickListener()
+	{
+		@Override
+		public void onItemClick(AdapterView<?> AdapterView, View convertView, int position, long arg3){
+			Log.e("test", "good");
+			ItemClickListener(AdapterView, convertView, position);
+		}
+	};
+	
 	public abstract void setConvertViewDetail(int position, View convertView);
+	
+	public abstract void ItemClickListener(AdapterView<?> AdapterView, View convertView, int position);
 	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState)
