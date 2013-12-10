@@ -17,6 +17,6 @@ public class SearchActivity extends	Activity{
 		getActionBar().hide();
 		getFragmentManager().beginTransaction().add(R.id.search_bar_container, new SearchBarFragment()).commit();
 		getFragmentManager().beginTransaction().add(R.id.category_button_container, new CategoryButtonFragment()).commit();
-		getFragmentManager().beginTransaction().add(R.id.Search_List_container, new UserSearchListFragment(null, 0, null)).commit();
+		getFragmentManager().beginTransaction().add(R.id.Search_List_container, new UserSearchListFragment(null, 0, this)).commit();
 	}
 }

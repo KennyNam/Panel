@@ -19,7 +19,7 @@ public class StorySearchListFragment extends BaseListviewFragment<SettingCompone
 {
 
 	public StorySearchListFragment(ArrayList<SettingComponentItem> arrList, int convertViewLayout, Context context)
-	{
+	{ 
 		super(arrList, convertViewLayout, context);
 	}
 
