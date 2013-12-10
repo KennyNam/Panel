@@ -29,7 +29,11 @@ public abstract class BaseListviewFragment<T> extends Fragment{
 	
 	public BaseListviewFragment(ArrayList<T> arrList, int convertViewLayout, Context context)
 	{
-		this.mArrayList = arrList;
+		if(arrList == null){
+			mArrayList = new ArrayList<T>();
+		}else{
+			this.mArrayList = arrList;
+		}
 		this.mConvertViewLayout = convertViewLayout;
 		this.mContext = context;
 		inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

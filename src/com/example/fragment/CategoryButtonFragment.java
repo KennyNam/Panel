@@ -49,13 +49,13 @@ public class CategoryButtonFragment extends Fragment
 				case R.id.user_category_button_search:
 					storyCategoryButton.setBackgroundResource(R.drawable.search_tab_button_01);
 					userCategoryButton.setBackgroundResource(R.drawable.search_tab_button_02);
-					getFragmentManager().beginTransaction().replace(R.id.Search_List_container, new UserSearchListFragment(null, 0, null)).commit();
+					getFragmentManager().beginTransaction().replace(R.id.Search_List_container, new UserSearchListFragment(null, 0, getActivity())).commit();
 					break;
 
 				case R.id.story_category_button_search:
 					storyCategoryButton.setBackgroundResource(R.drawable.search_tab_button_02);
 					userCategoryButton.setBackgroundResource(R.drawable.search_tab_button_01);
-					getFragmentManager().beginTransaction().replace(R.id.Search_List_container, new StorySearchListFragment(null, 0, null)).commit();
+					getFragmentManager().beginTransaction().replace(R.id.Search_List_container, new StorySearchListFragment(null, 0, getActivity())).commit();
 					break;
 
 				default:

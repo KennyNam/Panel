@@ -47,26 +47,22 @@ public class SettingListviewFragment extends BaseListviewFragment<SettingCompone
 			
 		case 1:
 			//Blog
-			// TODO
-			Toast.makeText(getActivity(), "Blog", Toast.LENGTH_LONG).show();
+			getFragmentManager().beginTransaction().replace(R.id.main_container, new WebViewFragment("http://www.trello.com")).commit();
 			break;
 						
 		case 2:
 			//Privacy problem
-			// TODO
-			Toast.makeText(getActivity(), "Privacy problem", Toast.LENGTH_LONG).show();
+			getFragmentManager().beginTransaction().replace(R.id.main_container, new WebViewFragment("http://www.tapastic.com")).commit();
 			break;
 			
 		case 3:
 			//Terms & Service
-			// TODO
-			Toast.makeText(getActivity(), "Terms & Service", Toast.LENGTH_LONG).show();
+			getFragmentManager().beginTransaction().replace(R.id.main_container, new WebViewFragment("http://www.google.com")).commit();
 			break;
 			
 		case 4:
 			//About
-			// TODO
-			Toast.makeText(getActivity(), "About", Toast.LENGTH_LONG).show();
+			getFragmentManager().beginTransaction().replace(R.id.main_container, new WebViewFragment("http://www.github.com")).commit();
 			break;
 			
 		case 5:
