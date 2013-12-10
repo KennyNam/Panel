@@ -30,7 +30,6 @@ public class BaseContainerFragment extends Fragment
 	public void onActivityCreated(Bundle savedInstanceState)
 	{
 		super.onActivityCreated(savedInstanceState);
-
 		getActivity().getActionBar().hide();
 	}
 }

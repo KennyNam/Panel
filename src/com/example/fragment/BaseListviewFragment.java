@@ -15,17 +15,15 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 @SuppressLint("ValidFragment")
-public abstract class BaseListviewFragment extends Fragment {
-	private ArrayList<?> mArrayList;
+public abstract class BaseListviewFragment<T> extends Fragment {
+	protected ArrayList<T> mArrayList;
 	private int mConvertViewLayout;
-	private LayoutInflater inflater;
+	private LayoutInflater inflater;	
 	private Context mContext;
-	private View mConvertView;
-	private int mPosition;
-	private ListView mBaseListview;
+	protected ListView mBaseListview;
 	private BaseListViewAdapter baseAdapter;
 	
-	public BaseListviewFragment(ArrayList<?> arrList, int convertViewLayout, Context context)
+	public BaseListviewFragment(ArrayList<T> arrList, int convertViewLayout, Context context)
 	{
 		this.mArrayList = arrList;
 		this.mConvertViewLayout = convertViewLayout;
@@ -63,36 +61,24 @@ public abstract class BaseListviewFragment extends Fragment {
 		}
 
 		@Override
-		public long getItemId(int position)
+		public View getView(int position, View convertView, ViewGroup parent)
 		{
-			return -1;
+			if(convertView == null) {
+				convertView = inflater.inflate(mConvertViewLayout, parent, false);
+			}
+			setConvertViewDetail(position, convertView);
+			return convertView;
+			
 		}
 
 		@Override
-		public View getView(int position, View convertView, ViewGroup parent)
+		public long getItemId(int arg0)
 		{
-			mPosition = position;
-			if(convertView == null) {
-				convertView = inflater.inflate(mConvertViewLayout, parent, false);
-				mConvertView = convertView;
-				return setConvertViewDetail();
-			}else{
-				return setConvertViewDetail();
-			}
-			
+			return arg0;
 		}
 		
 	}
-
-	public View getConvertView(){
-		return mConvertView;
-	}
-	
-	public int getPosition(){
-		return mPosition;
-	}
-	
-	public abstract View setConvertViewDetail();
+	public abstract void setConvertViewDetail(int position, View convertView);
 	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState)

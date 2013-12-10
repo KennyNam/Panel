@@ -8,32 +8,32 @@ import com.example.slidemenu.SettingComponentItem;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 
 @SuppressLint("ValidFragment")
-public class SettingListviewFragment extends BaseListviewFragment
+public class SettingListviewFragment extends BaseListviewFragment<SettingComponentItem>
 {
-	private ArrayList<?> mArrList;
-	private View mConvertView;
-	private int mPosition;
-	public SettingListviewFragment(ArrayList<?> arrList, int convertViewLayout, Context context)
+	public SettingListviewFragment(ArrayList<SettingComponentItem> arrList, int convertViewLayout, Context context)
 	{
 		super(arrList, convertViewLayout, context);
-		this.mArrList = arrList;
+		mBaseListview.setOnItemClickListener(listViewOnItemClickListener);
 	}
-
-	@Override
-	public View setConvertViewDetail()
+	
+	AdapterView.OnItemClickListener listViewOnItemClickListener = new OnItemClickListener()
 	{
-		mConvertView = getConvertView();
-		mPosition = getPosition();
-		TextView settingListText = (TextView) mConvertView.findViewById(R.id.setting_list_text);
-		if(mArrList.get(0) instanceof SettingComponentItem) {
-			settingListText.setText(((SettingComponentItem) mArrList.get(mPosition)).getText());
-		} else {
-			//Error
-			settingListText.setText("null");
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3)
+		{
+			
 		}
-		return mConvertView;
+	};
+	@Override
+	public void setConvertViewDetail(int position, View convertView)
+	{
+		TextView settingListText = (TextView) convertView.findViewById(R.id.setting_list_text);
+		settingListText.setText(mArrayList.get(position).getText());
 	}
 }
