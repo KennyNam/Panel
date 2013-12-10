@@ -8,7 +8,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -21,7 +20,6 @@ import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -30,9 +28,7 @@ import com.example.adapter.LeftDrawerListAdapter;
 import com.example.adapter.RightDrawerListAdapter;
 import com.example.customview.DynamicListView;
 import com.example.fragment.BaseContainerFragment;
-import com.example.fragment.BaseListviewFragment;
 import com.example.fragment.SettingListviewFragment;
-import com.example.fragment.TopMenuBarFragment;
 import com.example.slidemenu.BasicContentsListItem;
 import com.example.slidemenu.PanelContentsListItem;
 import com.example.slidemenu.R;
@@ -131,6 +127,10 @@ public class SlideMenuActivity extends Activity
 					}
 					SettingListviewFragment settingListviewFragment = new SettingListviewFragment(arrList, R.layout.setting_listview_component, SlideMenuActivity.this);
 					getFragmentManager().beginTransaction().add(R.id.main_container, settingListviewFragment).commit();
+					
+//					SetttingListViewFragment_test settingListviewFragment = new SetttingListViewFragment_test(arrList, , SlideMenuActivity.this);
+//					getFragmentManager().beginTransaction().add(R.id.main_container, new SetttingListViewFragment_test()).commit();
+					 
 					break;
 					
 				default:

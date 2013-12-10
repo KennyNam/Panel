@@ -21,7 +21,7 @@
 	    	android:textSize="16.5dp"
 	        />
 	    
-	    <ImageButton 
+	    <ImageView
 	    	android:layout_width="8dp"
 	    	android:layout_height="13.5dp"
 	    	android:layout_marginLeft="85dp"

@@ -19,13 +19,13 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 @SuppressLint("ValidFragment")
-public abstract class BaseListviewFragment<T> extends Fragment {
+public abstract class BaseListviewFragment<T> extends Fragment{
 	protected ArrayList<T> mArrayList;
 	private int mConvertViewLayout;
 	private LayoutInflater inflater;	
 	private Context mContext;
 	protected ListView mBaseListview;
-	private BaseListViewAdapter baseAdapter;
+	protected BaseListViewAdapter baseAdapter;
 	
 	public BaseListviewFragment(ArrayList<T> arrList, int convertViewLayout, Context context)
 	{
@@ -89,14 +89,13 @@ public abstract class BaseListviewFragment<T> extends Fragment {
 	{
 		@Override
 		public void onItemClick(AdapterView<?> AdapterView, View convertView, int position, long arg3){
-			Log.e("test", "good");
-			ItemClickListener(AdapterView, convertView, position);
+			OnItemClickListener(AdapterView, convertView, position);
 		}
 	};
 	
 	public abstract void setConvertViewDetail(int position, View convertView);
 	
-	public abstract void ItemClickListener(AdapterView<?> AdapterView, View convertView, int position);
+	public abstract void OnItemClickListener(AdapterView<?> AdapterView, View convertView, int position);
 	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState)
