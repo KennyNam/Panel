@@ -127,10 +127,6 @@ public class SlideMenuActivity extends Activity
 					}
 					SettingListviewFragment settingListviewFragment = new SettingListviewFragment(arrList, R.layout.setting_listview_component, SlideMenuActivity.this);
 					getFragmentManager().beginTransaction().add(R.id.main_container, settingListviewFragment).commit();
-					
-//					SetttingListViewFragment_test settingListviewFragment = new SetttingListViewFragment_test(arrList, , SlideMenuActivity.this);
-//					getFragmentManager().beginTransaction().add(R.id.main_container, new SetttingListViewFragment_test()).commit();
-					 
 					break;
 					
 				default:

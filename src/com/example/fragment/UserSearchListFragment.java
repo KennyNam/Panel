@@ -1,28 +1,41 @@
 package com.example.fragment;
 
-import com.example.slidemenu.R;
+import java.util.ArrayList;
 
+import com.example.slidemenu.R;
+import com.example.slidemenu.SettingComponentItem;
+
+import android.annotation.SuppressLint;
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
-public class UserSearchListFragment extends Fragment
+@SuppressLint("ValidFragment")
+public class UserSearchListFragment extends BaseListviewFragment<SettingComponentItem>
 {
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+	public UserSearchListFragment(ArrayList<SettingComponentItem> arrList, int convertViewLayout, Context context)
 	{
-		View fragmentView = inflater.inflate(R.layout.user_search_list_fragment, container, false);
-		return fragmentView;
+		super(arrList, convertViewLayout, context);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void onActivityCreated(Bundle savedInstanceState)
+	public void setConvertViewDetail(int position, View convertView)
 	{
-		super.onActivityCreated(savedInstanceState);
+		// TODO Auto-generated method stub
+		
+	}
 
+	@Override
+	public void OnItemClickListener(AdapterView<?> AdapterView, View convertView, int position)
+	{
+		// TODO Auto-generated method stub
+		
 	}
 
 }
