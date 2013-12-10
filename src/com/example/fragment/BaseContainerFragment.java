@@ -1,14 +1,12 @@
 package com.example.fragment;
 
-import com.example.slidemenu.R;
-import com.example.slidemenu.R.id;
-import com.example.slidemenu.R.layout;
-
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.slidemenu.R;
 
 public class BaseContainerFragment extends Fragment
 {
@@ -30,7 +28,6 @@ public class BaseContainerFragment extends Fragment
 	public void onActivityCreated(Bundle savedInstanceState)
 	{
 		super.onActivityCreated(savedInstanceState);
-
 		getActivity().getActionBar().hide();
 	}
 }
