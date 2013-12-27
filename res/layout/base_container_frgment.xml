@@ -27,12 +27,88 @@
                 android:layout_height="35dp"
                 android:fillViewport="true"
                 android:overScrollMode="never"
-                android:scrollbars="none" >
+                android:scrollbars="none" 
+                android:background="@android:color/darker_gray">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="horizontal" >
+
+                    <FrameLayout
+                        android:id="@+id/arrange_by_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="131.8dp"
+                        android:layout_marginRight="41.7dp"
+                        android:orientation="vertical" >
+
+                        <ImageView
+                            android:id="@+id/arrange_by_1_image"
+                            android:layout_width="96.5dp"
+                            android:layout_height="2dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@android:color/holo_blue_bright" 
+                            android:visibility="invisible"/>
+
+                        <TextView
+                            android:layout_width="88.5dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Popular"
+                            android:textColor="@android:color/white"
+                            android:textSize="14sp" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/arrange_by_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="41.7dp"
+                        android:layout_marginRight="41.8dp"
+                        android:orientation="vertical" >
+
+                        <ImageView
+                            android:id="@+id/arrange_by_2_image"
+                            android:layout_width="96.5dp"
+                            android:layout_height="2dp"
+                            android:background="@android:color/holo_blue_bright"
+                            android:gravity="center_horizontal" 
+                            android:visibility="visible"/>
+
+                        <TextView
+                            android:layout_width="88.5dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Most View"
+                            android:textColor="@android:color/white"
+                            android:textSize="14sp" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/arrange_by_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="41.8dp"
+                        android:layout_marginRight="131.8dp"
+                        android:orientation="vertical" >
+
+                        <ImageView
+                            android:id="@+id/arrange_by_3_image"
+                            android:layout_width="96.5dp"
+                            android:layout_height="2dp"
+                            android:background="@android:color/holo_blue_bright"
+                            android:gravity="center_horizontal" 
+                            android:visibility="invisible"/>
+
+                        <TextView
+                            android:layout_width="88.5dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="New"
+                            android:textColor="@android:color/white"
+                            android:textSize="14sp" />
+                    </FrameLayout>
                 </LinearLayout>
             </com.example.customview.CustomHorizonScrollViewPicker>
 
