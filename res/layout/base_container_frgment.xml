@@ -4,25 +4,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
-   	<FrameLayout
-       android:id="@+id/top_container"
-       android:layout_width="match_parent"
-       android:layout_height="60dp" >
-    </FrameLayout>
-    <!-- 
+
     <FrameLayout
-       android:id="@+id/toolbar_container"
-       android:layout_width="match_parent"
-       android:layout_height="35dp" 
-       android:orientation="vertical">
-    </FrameLayout>
-     -->
+        android:id="@+id/top_container"
+        android:layout_width="match_parent"
+        android:layout_height="60dp" />
 
     <FrameLayout
         android:id="@+id/main_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:clickable="true" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <com.example.customview.CustomHorizonScrollViewPicker
+                android:id="@+id/horizontal_scroll_view_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:fillViewport="true"
+                android:overScrollMode="never"
+                android:scrollbars="none" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal" >
+                </LinearLayout>
+            </com.example.customview.CustomHorizonScrollViewPicker>
+
+            <FrameLayout
+                android:id="@+id/feed_list_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true" />
+        </LinearLayout>
     </FrameLayout>
 
 </LinearLayout>

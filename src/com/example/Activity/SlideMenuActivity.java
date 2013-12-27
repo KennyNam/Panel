@@ -20,12 +20,19 @@ import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
+import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ExpandableListView.OnGroupClickListener;
+import android.widget.ExpandableListView.OnGroupCollapseListener;
+import android.widget.ExpandableListView.OnGroupExpandListener;
 
 import com.example.adapter.LeftDrawerListAdapter;
 import com.example.adapter.RightDrawerListAdapter;
+import com.example.customview.CustomHorizonScrollViewPicker;
 import com.example.customview.DynamicListView;
 import com.example.fragment.BaseContainerFragment;
 import com.example.fragment.SettingListviewFragment;
@@ -34,10 +41,16 @@ import com.example.slidemenu.PanelContentsListItem;
 import com.example.slidemenu.R;
 import com.example.slidemenu.SettingComponentItem;
 
+import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnChildClickListener;
+import android.widget.ExpandableListView.OnGroupClickListener;
+import android.widget.ExpandableListView.OnGroupCollapseListener;
+import android.widget.ExpandableListView.OnGroupExpandListener;
+
 public class SlideMenuActivity extends Activity
 {
 	private DrawerLayout mDrawerLayout;
-	private ListView mLeftDrawerList;
+	private ExpandableListView mLeftDrawerList;
 	private DynamicListView mRightDrawerList;
 	private FrameLayout mContentFrame;
 	private int mWindowWidth;
@@ -76,7 +89,7 @@ public class SlideMenuActivity extends Activity
 		// width with whole LeftDrawer
 		setDrawerWidth();
 		mDrawerLayout.setScrimColor(color.transparent);
-		mLeftDrawerList = (ListView) findViewById(R.id.left_drawer);
+		mLeftDrawerList = (ExpandableListView) findViewById(R.id.left_drawer);
 
 		mRightDrawerList = (DynamicListView) findViewById(R.id.panel_list_view);
 		mRightDrawerList.getLayoutParams().width = mLeftDrawerListWidth;
@@ -89,7 +102,10 @@ public class SlideMenuActivity extends Activity
 		mLeftDrawerListAdapter = new LeftDrawerListAdapter(this);
 		mLeftDrawerList.setAdapter(mLeftDrawerListAdapter);
 		mLeftDrawerList.getLayoutParams().width = mLeftDrawerListWidth;
-		mLeftDrawerList.setOnItemClickListener(ListViewOnClickListener);
+		
+		mLeftDrawerList.setOnGroupClickListener(GroupClickListener);
+		mLeftDrawerList.setOnChildClickListener(ChildClickListener);
+		
 		mDrawerLayout.setDrawerListener(mDrawerListener);
 
 		getActionBar().hide();
@@ -98,65 +114,67 @@ public class SlideMenuActivity extends Activity
 		getFragmentManager().beginTransaction().add(R.id.content_frame, baseContaiverFagment).commit();
 	}
 
-	private AdapterView.OnItemClickListener ListViewOnClickListener = new AdapterView.OnItemClickListener()
-	{
+    private AdapterView.OnItemClickListener ListViewOnClickListener = new AdapterView.OnItemClickListener() {
 
-		@Override
-		public void onItemClick(AdapterView<?> AdapterView, View convertView, int position, long arg3)
-		{
-			switch (AdapterView.getId())
-			{
-			case R.id.left_drawer:
-				int tag = mLeftDrawerListAdapter.getTag((BasicContentsListItem) mLeftDrawerListAdapter.getItem(position));
-				switch (tag)
-				{
-				case 0:
-					confirmDrawerState(GravityCompat.START);
-					Intent intentToSearchActivity = new Intent(SlideMenuActivity.this, SearchActivity.class);
-					startActivityForResult(intentToSearchActivity, SEARCH_REQUEST_CODE);
-					break;
+        @Override
+        public void onItemClick(AdapterView<?> AdapterView, View convertView, int position, long arg3) {
+            PanelContentsListItem PanelContentsObject = (PanelContentsListItem) mRightDrawerAdapter.getItem(position);
+            if (position == AdapterView.getCount() - 1) {
+                mRightDrawerList.addPanel();
+            } else {
+                if (presentSelectedItemPosition != null) {
+                    mRightDrawerAdapter.setTagSelectToggle(presentSelectedItemPosition);
+                }
+                mRightDrawerAdapter.setTagSelectToggle(PanelContentsObject);
+                presentSelectedItemPosition = PanelContentsObject;
+            }
 
-				case 7:
-					confirmDrawerState(GravityCompat.START);
-					ArrayList<SettingComponentItem> arrList = new ArrayList<SettingComponentItem>();
-					String[] settingComponenttext = new String[]
-					{ "Report problem", "Blog", "Privacy problem", "Terms & Service", "About", "Social connection", "Edit profile", "Log out" };
-					for (int i = 0; i < settingComponenttext.length; i++)
-					{
-						arrList.add(new SettingComponentItem(settingComponenttext[i]));
-					}
-					SettingListviewFragment settingListviewFragment = new SettingListviewFragment(arrList, R.layout.setting_listview_component, SlideMenuActivity.this);
-					getFragmentManager().beginTransaction().add(R.id.main_container, settingListviewFragment).commit();
-					break;
-					
-				default:
-					break;
-				}
-				break;
+        }
+    };
+    
+    
+    //LeftDrawer inner Genre click listener
+    ExpandableListView.OnChildClickListener ChildClickListener = new OnChildClickListener() {
 
-			case R.id.panel_list_view:
-				PanelContentsListItem PanelContentsObject = (PanelContentsListItem) mRightDrawerAdapter.getItem(position);
-				if (position == AdapterView.getCount() - 1)
-				{
-					mRightDrawerList.addPanel();
-				} else
-				{
-					if (presentSelectedItemPosition != null)
-					{
-						mRightDrawerAdapter.setTagSelectToggle(presentSelectedItemPosition);
-					}
-					mRightDrawerAdapter.setTagSelectToggle(PanelContentsObject);
-					presentSelectedItemPosition = PanelContentsObject;
-				}
-				break;
+        @Override
+        public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+            return false;
+        }
+    }; 
+    
+    ExpandableListView.OnGroupClickListener GroupClickListener = new OnGroupClickListener() {
 
-			default:
-				break;
-			}
-		}
+        @Override
+        public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+            int tag = mLeftDrawerListAdapter.getTag((BasicContentsListItem) mLeftDrawerListAdapter.getGroup(groupPosition));
+            switch (tag) {
+            case 0:
+                confirmDrawerState(GravityCompat.START);
+                Intent intentToSearchActivity = new Intent(SlideMenuActivity.this, SearchActivity.class);
+                startActivityForResult(intentToSearchActivity, SEARCH_REQUEST_CODE);
+                break;
 
-	};
+            case 7:
+                confirmDrawerState(GravityCompat.START);
+                ArrayList<SettingComponentItem> arrList = new ArrayList<SettingComponentItem>();
+                String[] settingComponenttext = new String[] { "Report problem", "Blog", "Privacy problem",
+                        "Terms & Service", "About", "Social connection", "Edit profile", "Log out" };
+                for (int i = 0; i < settingComponenttext.length; i++) {
+                    arrList.add(new SettingComponentItem(settingComponenttext[i]));
+                }
+                SettingListviewFragment settingListviewFragment = new SettingListviewFragment(arrList,
+                        R.layout.setting_listview_component, SlideMenuActivity.this);
+                getFragmentManager().beginTransaction().add(R.id.main_container, settingListviewFragment).commit();
+                break;
 
+            default:
+                break;
+            }
+
+            return false;
+        }
+    };
+    
 	private void SetRightDrawerPanelList()
 	{
 		Bitmap testImage0 = BitmapFactory.decodeResource(this.getResources(), R.drawable.left_slide_icon0);
@@ -325,6 +343,16 @@ public class SlideMenuActivity extends Activity
 				// doing something after SearchActivity finish
 			}
 		}
+	}
+	
+	@Override
+	public void onWindowFocusChanged(boolean hasFocus) {
+	    super.onWindowFocusChanged(hasFocus);
+	    CustomHorizonScrollViewPicker testSize = (CustomHorizonScrollViewPicker) findViewById(R.id.horizontal_scroll_view_picker);
+	    testSize.getWidth();
+	    testSize.setScrollX(testSize.getWidth()/2);
+	    LinearLayout testSize2 = (LinearLayout) testSize.getChildAt(0);
+	    testSize2.getWidth();
 	}
 
 }
