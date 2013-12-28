@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -38,7 +39,6 @@ public class BaseContainerFragment extends Fragment {
         mHorizontalScrollViewPicker = (CustomHorizonScrollViewPicker) fragmentView
                 .findViewById(R.id.horizontal_scroll_view_picker);
         horizontalPickerContainer = (LinearLayout) mHorizontalScrollViewPicker.getChildAt(0);
-
         for (int i = 0; i < horizontalPickerContainer.getChildCount(); i++) {
             FrameLayout selectFrame = (FrameLayout) horizontalPickerContainer.getChildAt(i);
             selectFrame.setTag(i);
@@ -47,17 +47,26 @@ public class BaseContainerFragment extends Fragment {
     }
 
     FrameLayout.OnClickListener viewOnclickListener = new OnClickListener() {
-
+        @SuppressWarnings("deprecation")
         @Override
         public void onClick(View view) {
             int position = (Integer) view.getTag();
-            mHorizontalScrollViewPicker.scrollTo(90 * (position) * 4, 0);
+            mHorizontalScrollViewPicker.smoothScrollTo(90 * (position) * 4, 0);
+
             for (int i = 0; i < horizontalPickerContainer.getChildCount(); i++) {
-                if(view == (FrameLayout)horizontalPickerContainer.getChildAt(i)){
-                    ((FrameLayout)horizontalPickerContainer.getChildAt(i)).getChildAt(0).setVisibility(View.VISIBLE);
-                }else{
-                    ((FrameLayout)horizontalPickerContainer.getChildAt(i)).getChildAt(0).setVisibility(View.INVISIBLE);
+                ImageView recentImage = (ImageView) ((FrameLayout) horizontalPickerContainer.getChildAt(i))
+                        .getChildAt(0);
+
+                if (view == (FrameLayout) horizontalPickerContainer.getChildAt(i)) {
+                    recentImage.setVisibility(View.VISIBLE);
+                    AlphaAnimation imageColorAnimation = new AlphaAnimation(0, 1);
+                    imageColorAnimation.setDuration(350);
+                    recentImage.startAnimation(imageColorAnimation);
+                } else {
+                    recentImage.setVisibility(View.INVISIBLE);
+                    recentImage.setAlpha(0);
                 }
+
             }
         }
     };

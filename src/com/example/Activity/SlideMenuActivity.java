@@ -349,10 +349,7 @@ public class SlideMenuActivity extends Activity
 	public void onWindowFocusChanged(boolean hasFocus) {
 	    super.onWindowFocusChanged(hasFocus);
 	    CustomHorizonScrollViewPicker testSize = (CustomHorizonScrollViewPicker) findViewById(R.id.horizontal_scroll_view_picker);
-	    testSize.getWidth();
 	    testSize.setScrollX(testSize.getWidth()/2);
-	    LinearLayout testSize2 = (LinearLayout) testSize.getChildAt(0);
-	    testSize2.getWidth();
 	}
 
 }
