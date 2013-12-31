@@ -25,10 +25,10 @@
                 android:id="@+id/horizontal_scroll_view_picker"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
+                android:background="@android:color/darker_gray"
                 android:fillViewport="true"
                 android:overScrollMode="never"
-                android:scrollbars="none" 
-                android:background="@android:color/darker_gray">
+                android:scrollbars="none" >
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -48,8 +48,8 @@
                             android:layout_width="96.5dp"
                             android:layout_height="2dp"
                             android:layout_gravity="center_horizontal"
-                            android:background="@android:color/holo_blue_bright" 
-                            android:visibility="invisible"/>
+                            android:background="@android:color/holo_blue_bright"
+                            android:visibility="invisible" />
 
                         <TextView
                             android:layout_width="88.5dp"
@@ -73,8 +73,8 @@
                             android:layout_width="96.5dp"
                             android:layout_height="2dp"
                             android:background="@android:color/holo_blue_bright"
-                            android:gravity="center_horizontal" 
-                            android:visibility="visible"/>
+                            android:gravity="center_horizontal"
+                            android:visibility="visible" />
 
                         <TextView
                             android:layout_width="88.5dp"
@@ -98,8 +98,8 @@
                             android:layout_width="96.5dp"
                             android:layout_height="2dp"
                             android:background="@android:color/holo_blue_bright"
-                            android:gravity="center_horizontal" 
-                            android:visibility="invisible"/>
+                            android:gravity="center_horizontal"
+                            android:visibility="invisible" />
 
                         <TextView
                             android:layout_width="88.5dp"
@@ -112,11 +112,11 @@
                 </LinearLayout>
             </com.example.customview.CustomHorizonScrollViewPicker>
 
-            <FrameLayout
-                android:id="@+id/feed_list_container"
+            <android.support.v4.view.ViewPager
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/pager"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clickable="true" />
+                android:layout_height="match_parent" />
         </LinearLayout>
     </FrameLayout>
 

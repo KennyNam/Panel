@@ -1,9 +1,13 @@
 package com.example.fragment;
 
-import java.util.ArrayList;
-
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v13.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.NavUtils;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,7 +16,6 @@ import android.view.animation.AlphaAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.example.customview.CustomHorizonScrollViewPicker;
 import com.example.slidemenu.R;
@@ -21,12 +24,15 @@ public class BaseContainerFragment extends Fragment {
     private View fragmentView;
     private LinearLayout horizontalPickerContainer;
     private CustomHorizonScrollViewPicker mHorizontalScrollViewPicker;
-
+    private ViewPager mPager;
+    private PagerAdapter mPagerAdapter;
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         fragmentView = inflater.inflate(R.layout.base_container_frgment, container, false);
         initTop();
         initArrangeButton();
+        initHomefeedListView();
         return fragmentView;
     }
 
@@ -44,6 +50,11 @@ public class BaseContainerFragment extends Fragment {
             selectFrame.setTag(i);
             selectFrame.setOnClickListener(viewOnclickListener);
         }
+    }
+    
+    private void initHomefeedListView() {
+        mPager = (ViewPager) fragmentView.findViewById(R.id.pager);
+        mPagerAdapter = new ScreenSlidePagerAdapter(getFragmentManager());
     }
 
     FrameLayout.OnClickListener viewOnclickListener = new OnClickListener() {
@@ -70,9 +81,21 @@ public class BaseContainerFragment extends Fragment {
             }
         }
     };
+    
+    private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
+        public ScreenSlidePagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
 
-    private void initHomefeedListView() {
-        // TODO
+        @Override
+        public Fragment getItem(int position) {
+            return ScreenSlidePageFragment.create(position);
+        }
+
+        @Override
+        public int getCount() {
+            return 0;
+        }
     }
 
     @Override
