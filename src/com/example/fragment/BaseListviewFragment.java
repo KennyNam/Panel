@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.example.slidemenu.R;
 
 import android.annotation.SuppressLint;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;

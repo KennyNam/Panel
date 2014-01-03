@@ -6,7 +6,7 @@ import com.example.slidemenu.R;
 import com.example.slidemenu.SettingComponentItem;
 
 import android.annotation.SuppressLint;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;

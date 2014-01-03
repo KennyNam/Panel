@@ -1,7 +1,7 @@
 package com.example.fragment;
 
 import android.annotation.SuppressLint;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;

@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 import android.R.color;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.DrawerLayout.DrawerListener;
@@ -21,14 +21,10 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.ExpandableListView;
-import android.widget.FrameLayout;
-import android.widget.HorizontalScrollView;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.ListView;
+import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
-import android.widget.ExpandableListView.OnGroupCollapseListener;
-import android.widget.ExpandableListView.OnGroupExpandListener;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
 
 import com.example.adapter.LeftDrawerListAdapter;
 import com.example.adapter.RightDrawerListAdapter;
@@ -41,13 +37,7 @@ import com.example.slidemenu.PanelContentsListItem;
 import com.example.slidemenu.R;
 import com.example.slidemenu.SettingComponentItem;
 
-import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.OnChildClickListener;
-import android.widget.ExpandableListView.OnGroupClickListener;
-import android.widget.ExpandableListView.OnGroupCollapseListener;
-import android.widget.ExpandableListView.OnGroupExpandListener;
-
-public class SlideMenuActivity extends Activity
+public class SlideMenuActivity extends FragmentActivity
 {
 	private DrawerLayout mDrawerLayout;
 	private ExpandableListView mLeftDrawerList;
@@ -77,16 +67,12 @@ public class SlideMenuActivity extends Activity
 		mPanelEditDoneButton = (ImageButton) findViewById(R.id.panel_edit_done_btn);
 		mPanelEditDoneButton.setOnClickListener(editButtonClickListener);
 
-		// check Display (It just check Display size), It's will removed
 		Display display = getWindowManager().getDefaultDisplay();
 		int width = display.getWidth();
 		int height = display.getHeight();
 		Log.e("displaywidth", String.valueOf(width));
 		Log.e("displayheight", String.valueOf(height));
 
-		// check left drawer Image's width to define LeftDrawer's width
-		// I need "R.drawable.left_slide_momo_background" because it have same
-		// width with whole LeftDrawer
 		setDrawerWidth();
 		mDrawerLayout.setScrimColor(color.transparent);
 		mLeftDrawerList = (ExpandableListView) findViewById(R.id.left_drawer);
@@ -111,7 +97,7 @@ public class SlideMenuActivity extends Activity
 		getActionBar().hide();
 		BaseContainerFragment baseContaiverFagment = new BaseContainerFragment();
 		baseContaiverFagment.setArguments(getIntent().getExtras());
-		getFragmentManager().beginTransaction().add(R.id.content_frame, baseContaiverFagment).commit();
+		getSupportFragmentManager().beginTransaction().add(R.id.content_frame, baseContaiverFagment).commit();
 	}
 
     private AdapterView.OnItemClickListener ListViewOnClickListener = new AdapterView.OnItemClickListener() {
@@ -164,7 +150,7 @@ public class SlideMenuActivity extends Activity
                 }
                 SettingListviewFragment settingListviewFragment = new SettingListviewFragment(arrList,
                         R.layout.setting_listview_component, SlideMenuActivity.this);
-                getFragmentManager().beginTransaction().add(R.id.main_container, settingListviewFragment).commit();
+                getSupportFragmentManager().beginTransaction().add(R.id.main_container, settingListviewFragment).commit();
                 break;
 
             default:
