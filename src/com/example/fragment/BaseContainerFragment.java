@@ -1,13 +1,12 @@
 package com.example.fragment;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.NavUtils;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -55,10 +54,8 @@ public class BaseContainerFragment extends Fragment {
     private void initHomefeedListView() {
         mPager = (ViewPager) fragmentView.findViewById(R.id.pager);
         
-        
-        //TODO
-        //need getFragmentManager Change
-        mPagerAdapter = new ScreenSlidePagerAdapter(getFragmentManager());
+        mPagerAdapter = new ScreenSlidePagerAdapter(getChildFragmentManager());
+        mPager.setAdapter(mPagerAdapter);
     }
 
     FrameLayout.OnClickListener viewOnclickListener = new OnClickListener() {
@@ -93,12 +90,13 @@ public class BaseContainerFragment extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
+        	Log.e("test", "fsdfdsf");
             return ScreenSlidePageFragment.create(position);
         }
 
         @Override
         public int getCount() {
-            return 0;
+            return 3;
         }
     }
 

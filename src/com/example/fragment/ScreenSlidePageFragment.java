@@ -32,6 +32,9 @@ public class ScreenSlidePageFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    	
+    	//이곳에서 리스트뷰를 만들어 리턴시킵니다.
+    	
         View fragmentView = (ViewGroup) inflater.inflate(R.layout.view_page_test_xml, container, false);
         ((TextView) fragmentView.findViewById(R.id.test_text)).setText("" + mPageNumber + 1);
         return fragmentView;
