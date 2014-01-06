@@ -33,6 +33,7 @@ public class CustomHorizonScrollViewPicker extends HorizontalScrollView {
     
     @Override
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+        Log.e("onScrollChanged", "" + this.getScrollX());
         super.onScrollChanged(l, t, oldl, oldt);
     }
 }

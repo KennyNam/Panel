@@ -32,10 +32,8 @@ import com.example.customview.CustomHorizonScrollViewPicker;
 import com.example.customview.DynamicListView;
 import com.example.fragment.BaseContainerFragment;
 import com.example.fragment.SettingListviewFragment;
-import com.example.slidemenu.BasicContentsListItem;
-import com.example.slidemenu.PanelContentsListItem;
+import com.example.slidemenu.*;
 import com.example.slidemenu.R;
-import com.example.slidemenu.SettingComponentItem;
 
 public class SlideMenuActivity extends FragmentActivity
 {
@@ -68,11 +66,8 @@ public class SlideMenuActivity extends FragmentActivity
 		mPanelEditDoneButton.setOnClickListener(editButtonClickListener);
 
 		Display display = getWindowManager().getDefaultDisplay();
-		int width = display.getWidth();
-		int height = display.getHeight();
-		Log.e("displaywidth", String.valueOf(width));
-		Log.e("displayheight", String.valueOf(height));
-
+		DeviceInfo.setHeightWidth(display.getWidth(), display.getHeight());
+		
 		setDrawerWidth();
 		mDrawerLayout.setScrimColor(color.transparent);
 		mLeftDrawerList = (ExpandableListView) findViewById(R.id.left_drawer);

@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.customview.CustomHorizonScrollViewPicker;
+import com.example.slidemenu.DeviceInfo;
 import com.example.slidemenu.R;
 
 public class BaseContainerFragment extends Fragment {
@@ -53,9 +55,35 @@ public class BaseContainerFragment extends Fragment {
     
     private void initHomefeedListView() {
         mPager = (ViewPager) fragmentView.findViewById(R.id.pager);
-        
         mPagerAdapter = new ScreenSlidePagerAdapter(getChildFragmentManager());
         mPager.setAdapter(mPagerAdapter);
+        mPager.setOnPageChangeListener(new OnPageChangeListener() {
+            
+            @Override
+            public void onPageSelected(int page) {
+                Log.e("onPageSelected", "" + page);
+            }
+            
+            @Override
+            public void onPageScrolled(int page, float ratio, int scroll) {
+                Log.e("onPageScrolled", "page = " + page + "  ratio = " + ratio + "  scroll = " + scroll);
+                Log.e("scrollviewWidth", "" + mHorizontalScrollViewPicker.getMaxScrollAmount());
+                Log.e("DeviceInfo.getWidth()", "" + DeviceInfo.getWidth());
+                mHorizontalScrollViewPicker.get
+                //TODO need change`
+//                mHorizontalScrollViewPicker.scrollTo((page * DeviceInfo.getWidth()) + scroll, 0);
+//                mHorizontalScrollViewPicker.scrollTo(400, 0);
+//                mHorizontalScrollViewPicker.scrollTo(700, 0);
+//                mHorizontalScrollViewPicker.scrollTo(200, 0);
+//                mHorizontalScrollViewPicker.scrollTo(100, 0);
+//                mHorizontalScrollViewPicker.scrollTo(0, 0);
+            }
+            
+            @Override
+            public void onPageScrollStateChanged(int arg0) {
+                Log.e("onPageScrollStateChanged", "" + arg0);
+            }
+        });
     }
 
     FrameLayout.OnClickListener viewOnclickListener = new OnClickListener() {
@@ -90,7 +118,6 @@ public class BaseContainerFragment extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
-        	Log.e("test", "fsdfdsf");
             return ScreenSlidePageFragment.create(position);
         }
 
