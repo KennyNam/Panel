@@ -60,28 +60,19 @@ public class BaseContainerFragment extends Fragment {
         mPager.setOnPageChangeListener(new OnPageChangeListener() {
             
             @Override
-            public void onPageSelected(int page) {
-                Log.e("onPageSelected", "" + page);
-            }
-            
-            @Override
             public void onPageScrolled(int page, float ratio, int scroll) {
-                Log.e("onPageScrolled", "page = " + page + "  ratio = " + ratio + "  scroll = " + scroll);
-                Log.e("scrollviewWidth", "" + mHorizontalScrollViewPicker.getMaxScrollAmount());
-                Log.e("DeviceInfo.getWidth()", "" + DeviceInfo.getWidth());
-                mHorizontalScrollViewPicker.get
-                //TODO need change`
-//                mHorizontalScrollViewPicker.scrollTo((page * DeviceInfo.getWidth()) + scroll, 0);
-//                mHorizontalScrollViewPicker.scrollTo(400, 0);
-//                mHorizontalScrollViewPicker.scrollTo(700, 0);
-//                mHorizontalScrollViewPicker.scrollTo(200, 0);
-//                mHorizontalScrollViewPicker.scrollTo(100, 0);
-//                mHorizontalScrollViewPicker.scrollTo(0, 0);
+                //TODO If want to scrolling the scrollview. 
+//                mHorizontalScrollViewPicker.scrollTo();
             }
-            
+
             @Override
             public void onPageScrollStateChanged(int arg0) {
-                Log.e("onPageScrollStateChanged", "" + arg0);
+                
+            }
+
+            @Override
+            public void onPageSelected(int arg0) {
+                
             }
         });
     }
